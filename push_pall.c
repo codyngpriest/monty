@@ -18,6 +18,20 @@ state_clear();
 exit(EXIT_FAILURE);
 }
 
+char *endptr;
+long int value = strtol(state->argument, &endptr, 10);
+
+if (*endptr != '\0')
+{
+fprintf(stderr, "L%d: usage: push integer\n", line_number);
+state_clear();
+exit(EXIT_FAILURE);
+}
+
+push_stack(stack, (int)value);
+}
+
+
 int value = atoi(state->argument);
 push_stack(stack, value);
 }
